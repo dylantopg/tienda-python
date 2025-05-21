@@ -88,13 +88,13 @@ class MainWindow(QMainWindow):
         data = self.inventory_service.get_inventory_table()
         self.table.setRowCount(len(data))
         for row, prod in enumerate(data):
-            self.table.setItem(row, 0, QTableWidgetItem(str(prod["barcode"])))
-            self.table.setItem(row, 1, QTableWidgetItem(prod["name"]))
-            self.table.setItem(row, 2, QTableWidgetItem(prod.get("description") or ""))
-            self.table.setItem(row, 3, QTableWidgetItem(str(prod["purchase_price"])))
-            self.table.setItem(row, 4, QTableWidgetItem(str(prod["retail_price"])))
-            self.table.setItem(row, 5, QTableWidgetItem(str(prod["wholesale_price"])))
-            self.table.setItem(row, 6, QTableWidgetItem(str(prod["quantity"])))
+            self.table.setItem(row, 0, QTableWidgetItem(str(prod["codigo_barras"])))
+            self.table.setItem(row, 1, QTableWidgetItem(prod["nombre"]))
+            self.table.setItem(row, 2, QTableWidgetItem(prod.get("descripcion") or ""))
+            self.table.setItem(row, 3, QTableWidgetItem(str(prod["precio_compra"])))
+            self.table.setItem(row, 4, QTableWidgetItem(str(prod["precio_detal"])))
+            self.table.setItem(row, 5, QTableWidgetItem(str(prod["precio_mayoreo"])))
+            self.table.setItem(row, 6, QTableWidgetItem(str(prod["unds"])))
 
     def _add_product(self) -> None:
         """Agrega un producto al inventario desde los campos de entrada."""
