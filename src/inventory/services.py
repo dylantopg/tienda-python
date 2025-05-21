@@ -166,6 +166,7 @@ class InventoryService:
             raise ValueError(f"Producto con código {barcode} no encontrado.")
         product.refill(amount)
         self.repository.save_product(product)
+        self.products = self.repository.get_all_products()
 
     def edit_product(self, barcode: str, **kwargs) -> None:
         product = self.get_product_by_barcode(barcode)
@@ -175,7 +176,6 @@ class InventoryService:
         old_wholesale = product.wholesale_price
         product.update(**kwargs)
         self.repository.save_product(product)
-        # Guardar historial si cambió precio
         if ("retail_price" in kwargs and kwargs["retail_price"] != old_retail) or ("wholesale_price" in kwargs and kwargs["wholesale_price"] != old_wholesale):
             history = ProductPriceHistory(
                 product_barcode=product.barcode,
@@ -185,6 +185,7 @@ class InventoryService:
             )
             self.repository.save_price_history(history)
             product.price_history.insert(0, history)
+        self.products = self.repository.get_all_products()
 
     def get_product_by_barcode(self, barcode: str) -> Optional[Product]:
         return self.repository.get_product_by_barcode(barcode)
@@ -240,6 +241,7 @@ class SaleService:
         total = self.current_sale.total()
         timestamp = datetime.now()
         sale_id = self.repository.save_sale(self.current_sale, timestamp)
+        self.inventory_service.products = self.inventory_service.repository.get_all_products()
         self.current_sale = None
         return total
 

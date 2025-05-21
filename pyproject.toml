@@ -3,7 +3,7 @@ name = "tienda-nueva"
 version = "0.1.0"
 description = "App de gestión de inventario para negocio"
 requires-python = ">=3.9"
-
+ 
 [tool.ruff]
 line-length = 88
 exclude = [".venv", "__pycache__"] 

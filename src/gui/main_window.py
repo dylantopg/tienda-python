@@ -1,12 +1,12 @@
 from typing import Optional
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
-    QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox, QInputDialog, QTabWidget, QFileDialog, QDateEdit
+    QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox, QInputDialog, QTabWidget, QFileDialog, QDateEdit, QToolBar
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QDate
 from src.inventory.models import Product
 from src.inventory.services import InventoryService
-from .sale_window import SaleWindow
+from src.gui.sale_window import SaleWindow
 import pandas as pd
 from datetime import datetime
 
@@ -29,11 +29,12 @@ class MainWindow(QMainWindow):
         self.sales_tab = SaleWindow(self.inventory_service, self)
         tabs.addTab(self.sales_tab, "Ventas")
         self.setCentralWidget(tabs)
-        # Botón exportar CSV
+        # Botón exportar CSV en un QToolBar
         export_btn = QPushButton("Exportar resumen a CSV")
         export_btn.clicked.connect(self._export_csv)
-        self.addToolBarBreak()
-        self.addToolBar(Qt.TopToolBarArea, self._toolbar_with(export_btn))
+        toolbar = QToolBar("Exportar")
+        toolbar.addWidget(export_btn)
+        self.addToolBar(Qt.TopToolBarArea, toolbar)
 
     def _setup_inventory_tab(self) -> None:
         layout = QVBoxLayout()
@@ -164,14 +165,6 @@ class MainWindow(QMainWindow):
         self.retail_input.clear()
         self.wholesale_input.clear()
         self.qty_input.clear()
-
-    def _toolbar_with(self, widget) -> 'QWidget':
-        bar = QWidget()
-        layout = QHBoxLayout()
-        layout.addWidget(widget)
-        layout.addStretch()
-        bar.setLayout(layout)
-        return bar
 
     def _export_csv(self) -> None:
         # Pedir fechas

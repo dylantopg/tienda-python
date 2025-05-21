@@ -160,6 +160,9 @@ class SaleWindow(QDialog):
     def _finalize_sale(self) -> None:
         try:
             total = self.sale_service.finalize_sale()
+            # Refrescar inventario en la ventana principal
+            if hasattr(self.parent(), '_refresh_table'):
+                self.parent()._refresh_table()
             QMessageBox.information(self, "Venta finalizada", f"Total a pagar: ${total:.2f}")
             self._reset_form()
         except Exception as e:

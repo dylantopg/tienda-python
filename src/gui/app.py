@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication
 import sys
 from src.inventory.services import InventoryService
-from .main_window import MainWindow
+from src.gui.main_window import MainWindow
 
 def main() -> None:
     """Punto de entrada para la aplicación GUI de inventario."""
