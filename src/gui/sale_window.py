@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 from src.inventory.services import InventoryService, SaleService
+from src.gui.print_ticket import print_sale_ticket
 
 class SaleWindow(QDialog):
     """Ventana para registrar una venta."""
@@ -159,7 +160,12 @@ class SaleWindow(QDialog):
 
     def _finalize_sale(self) -> None:
         try:
+            # Guardar referencia a la venta antes de finalizarla
+            sale = self.sale_service.current_sale
             total = self.sale_service.finalize_sale()
+            # Imprimir ticket si la venta existe
+            if sale is not None:
+                print_sale_ticket(sale, total)
             # Refrescar inventario en la ventana principal
             if hasattr(self.parent(), '_refresh_table'):
                 self.parent()._refresh_table()

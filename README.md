@@ -48,3 +48,16 @@ ruff check src tests
 
 - Persistencia en base de datos
 - Control de usuarios y roles 
+
+
+## INSTRUCCIONES
+Install uv if you haven't already (you can find it at https://github.com/astral-sh/uv)
+Create and activate the virtual environment
+   uv venv .venv
+   .venv\Scripts\activate  # Since you're on Windows
+  uv pip install pytest ruff pyside6
+  pip install -r requirements.txt
+
+
+  PARA EJECUTAR
+     python -m src.gui.app
