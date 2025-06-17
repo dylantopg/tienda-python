@@ -194,7 +194,15 @@ class InventoryService:
         return self.repository.get_products_by_name(name)
 
     def get_inventory_table(self) -> List[dict]:
-        return [p.__dict__ for p in self.products]
+        return [{
+            "codigo_barras": p.barcode,
+            "nombre": p.name,
+            "descripcion": p.description,
+            "precio_compra": p.purchase_price,
+            "precio_detal": p.retail_price,
+            "precio_mayoreo": p.wholesale_price,
+            "unds": p.quantity
+        } for p in self.products]
 
 class SaleService:
     """Servicio para gestionar el proceso de ventas."""

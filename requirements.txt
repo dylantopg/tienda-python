@@ -1,3 +1,5 @@
 pyside6>=6.6.1
 pytest>=8.0.0
-ruff>=0.2.1 
+ruff>=0.2.1
+pandas>=2.2.0
+python-escpos>=3.0.8 
