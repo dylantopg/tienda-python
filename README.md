@@ -1,4 +1,59 @@
-# Tienda Nueva - Gestión de Inventario
+# Tienda Nueva
+
+Sistema de gestión de inventario y ventas con interfaz gráfica.
+
+## Requisitos
+
+- Python 3.8 o superior
+- Git
+
+## Instalación
+
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/dylantopg/tienda-python.git
+cd tienda-python
+```
+
+2. Crear entorno virtual:
+```bash
+python -m venv .venv
+```
+
+3. Activar el entorno virtual:
+- Windows:
+```bash
+.venv\Scripts\activate
+```
+- Linux/Mac:
+```bash
+source .venv/bin/activate
+```
+
+4. Instalar pip en el entorno virtual (si es necesario):
+```bash
+python -m ensurepip --upgrade
+```
+
+5. Instalar dependencias:
+```bash
+python -m pip install -r requirements.txt
+```
+
+## Ejecutar la aplicación
+
+Con el entorno virtual activado:
+```bash
+python src/gui/app.py
+```
+
+## Características
+
+- Gestión de inventario
+- Registro de ventas
+- Historial de precios
+- Exportación de reportes
+- Impresión de tickets
 
 ## Estructura del Proyecto
 
